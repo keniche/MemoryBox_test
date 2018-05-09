@@ -19,6 +19,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         Bundle args = new Bundle();
         args.putInt("image_id", mImageList[position]);
         fragment.setArguments(args);
+
         return fragment;
     }
 
