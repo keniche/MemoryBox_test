@@ -13,10 +13,14 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 
+import io.realm.Realm;
+
 
 public class AddActivity extends AppCompatActivity {
     static final int REQUEST_CODE_GALLERY = 1;
     static final int REQUEST_CODE_CAMERA = 2;
+
+    public Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
+
+        realm = Realm.getDefaultInstance();
 
         int[] imageList ={R.drawable.icon_grey_1,
                 R.drawable.icon_grey_2,
@@ -61,6 +67,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     //ギャラリーとカメラから情報を取ってくるメソッド
+
+
     /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -83,5 +91,29 @@ public class AddActivity extends AppCompatActivity {
         } else if (resultCode == RESULT_CANCELED) {
             Toast.makeText(AddActivity.this, "CANCEL", Toast.LENGTH_LONG).show();
         }
-    }*/
+    }
+
+    public void save(/*TODO:保存するものの引数いれる*/){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Memory memory = realm.createObject(Memory.class);
+                //TODO:保存するものの変数"memory.◯◯ = ◯◯"
+            }
+        });
+    }
+
+    /*
+    public void add (View v){
+        save(/*TODO:保存するものの引数いれる*/);
+
+        finish();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+        realm.close();
+    }
 }
