@@ -6,18 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toolbar;
 
-import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        realm = Realm.getDefaultInstance();
     }
 
 
@@ -27,10 +24,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        realm.close();
-    }
 }
